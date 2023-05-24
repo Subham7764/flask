@@ -71,10 +71,6 @@ def fetch_tweets_from_id(tweet_id):
 def index():
     return jsonify({"Choo Choo": "Welcome to your Flask app 🚅"})
 
-@app.route('/', methods=['GET'])
-def index():
-    res = {"app": "Text sentiment analysis for social media"}
-    return jsonify(res)
 
 @app.route('/fetch_user_tweets', methods=['GET'])
 def fetch_user_tweets_route():
