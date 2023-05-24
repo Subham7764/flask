@@ -1,4 +1,4 @@
-import cv2
+# import cv2
 import time
 from flask import Flask, request, jsonify
 import snscrape.modules.twitter as sntwitter
