@@ -3,32 +3,32 @@ import time
 from flask import Flask, request, jsonify
 import snscrape.modules.twitter as sntwitter
 import os
-from fer import FER
+# from fer import FER
 
 app = Flask(__name__)
 
-emotion_detector = FER(mtcnn=True)
+# emotion_detector = FER(mtcnn=True)
 
-def predict_image(img):
+# def predict_image(img):
 
-    # Convert Gradio image format (BGR) to RGB
-    img = cv2.imread(img)
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    analysis = emotion_detector.detect_emotions(img)
-    start_time = time.time() 
+#     # Convert Gradio image format (BGR) to RGB
+#     img = cv2.imread(img)
+#     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+#     analysis = emotion_detector.detect_emotions(img)
+#     start_time = time.time() 
 
-    res = []
-    for data in analysis:
-      emotions = data['emotions']
-      max_emotion = max(emotions, key=emotions.get)
-      max_value = emotions[max_emotion]
-      res.append({max_emotion: max_value})
+#     res = []
+#     for data in analysis:
+#       emotions = data['emotions']
+#       max_emotion = max(emotions, key=emotions.get)
+#       max_value = emotions[max_emotion]
+#       res.append({max_emotion: max_value})
   
-    response = {
-        'analysis': analysis,
-        'best_predict': list(res),
-    }
-    return response
+#     response = {
+#         'analysis': analysis,
+#         'best_predict': list(res),
+#     }
+#     return response
 
 def fetch_user_tweets(user):
   maxTweets = 500
@@ -86,15 +86,15 @@ def fetch_user_tweets_route():
 def fetch_tweets_from_id_route():
     return jsonify(fetch_tweets_from_id(request.args.get('tweet_id')))
 
-@app.route('/predict', methods=['POST'])
-def predict():
-    file = request.files['image']
-    img_path = 'temp.jpg'  # Temporarily save the image to a file
-    file.save(img_path)
+# @app.route('/predict', methods=['POST'])
+# def predict():
+#     file = request.files['image']
+#     img_path = 'temp.jpg'  # Temporarily save the image to a file
+#     file.save(img_path)
     
-    result = predict_image(img_path)
+#     result = predict_image(img_path)
     
-    return jsonify(result)
+#     return jsonify(result)
 
 if __name__ == '__main__':
     app.run(ebug=True, timeout=600, port=os.getenv("PORT", default=5000))
