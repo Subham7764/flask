@@ -3,9 +3,11 @@ import time
 from flask import Flask, request, jsonify
 import snscrape.modules.twitter as sntwitter
 import os
+from flask_cors import CORS
 # from fer import FER
 
 app = Flask(__name__)
+CORS(app)
 
 # emotion_detector = FER(mtcnn=True)
 
